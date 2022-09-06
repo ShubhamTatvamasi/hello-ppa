@@ -1,5 +1,7 @@
-Package: helloworld
-Version: 1.0
+Source: helloworld
+Version: 1.0-1
 Maintainer: Shubham Tatvamasi <shubhamtatvamasi@gmail.com>
-Architecture: all
+
+Package: helloworld
+Architecture: any
 Description: Hello World
