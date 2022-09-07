@@ -7,8 +7,27 @@ debuild -k0F195430352D314080C96E67B76BE3858E1FDB4F
 
 Upload:
 ```bash
-dput ppa:shubhamtatvamasi/hello ../*.changes
+dput ppa:shubhamtatvamasi/helloworld ../*.changes
 ```
+
+https://launchpad.net/~shubhamtatvamasi/+archive/ubuntu/helloworld
+
 
 Reference:
 https://www.debian.org/doc/manuals/maint-guide/dreq.en.html
+
+
+
+Create VM for development:
+```bash
+multipass launch focal \
+  --name ppa \
+  --disk 20G \
+  --mem 2G \
+  --cpus 2
+```
+
+Access VM:
+```bash
+multipass shell ppa
+```
