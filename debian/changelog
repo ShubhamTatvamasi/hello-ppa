@@ -1,5 +1,5 @@
-helloworld (version-distro) distro; urgency=low
+helloworld (sed-version-sed-distro) sed-distro; urgency=low
 
-  * Added support for more ubuntu versions
+  * Updated code
 
- -- MAINTAINER <shubhamtatvamasi@gmail.com>  date +0000
+ -- MAINTAINER <shubhamtatvamasi@gmail.com> sed-date +0000
