@@ -1,7 +1,8 @@
 Source: helloworld
 Maintainer: Shubham Tatvamasi <shubhamtatvamasi@gmail.com>
-Standards-Version: 1.0.2
+Standards-Version: 1.0.3
 Section: utils
+Build-Depends: debhelper (>= 7)
 
 Package: helloworld
 Priority: optional
