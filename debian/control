@@ -1,10 +1,10 @@
 Source: helloworld
 Maintainer: Shubham Tatvamasi <shubhamtatvamasi@gmail.com>
-Standards-Version: 1.0.1
+Standards-Version: 1.0.2
 Section: utils
 
 Package: helloworld
-Priority: extra
+Priority: optional
 Architecture: any
 Description: a simple helloworld package
   Just prints "Hello World", it's very useful.
