@@ -1,0 +1,27 @@
+---
+name: Build and upload packages to PPA
+
+on: workflow_dispatch
+
+jobs:
+  ppa-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Add GPG Key
+        run: echo "${{ secrets.GPG_PRIVATE_KEY }}" | gpg --batch --passphrase "${{ secrets.GPG_PASSPHRASE }}" --import
+
+      - name: Build the debian packages
+        run: sudo debuild -uc -us -S -sa \
+          -k"shubhamtatvamasi@gmail.com" \
+          -p"gpg --batch --passphrase "${{ secrets.GPG_PASSPHRASE }}" --pinentry-mode loopback"
+
+      - name: Sign changes with your Key
+        run: debsign ../*.changes \
+          -k"shubhamtatvamasi@gmail.com" \
+          -p"gpg --batch --passphrase "${{ secrets.GPG_PASSPHRASE }}" --pinentry-mode loopback"
+
+      - name: Sign changes with your Key
+        run: dput --unchecked ppa:shubhamtatvamasi/helloworld ../*.changes

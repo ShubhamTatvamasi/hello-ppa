@@ -1,13 +1,34 @@
 # hello-ppa
 
+Generate change logs:
+```bash
+dch -i --create
+```
+
 Build deb file:
 ```bash
-debuild -k0F195430352D314080C96E67B76BE3858E1FDB4F
+sudo debuild -uc -us -S -sa \
+  -k"shubhamtatvamasi@gmail.com" \
+  -p"gpg --batch --passphrase "" --pinentry-mode loopback"
+
+debsign ../*.changes \
+  -k"shubhamtatvamasi@gmail.com" \
+  -p"gpg --batch --passphrase "" --pinentry-mode loopback"
 ```
 
 Upload:
 ```bash
-dput ppa:shubhamtatvamasi/helloworld ../*.changes
+dput --unchecked ppa:shubhamtatvamasi/helloworld ../*.changes
+```
+
+Add PPA repo:
+```bash
+sudo add-apt-repository --yes ppa:shubhamtatvamasi/helloworld
+```
+
+Install helloworld package:
+```bash
+sudo apt install helloworld
 ```
 
 https://launchpad.net/~shubhamtatvamasi/+archive/ubuntu/helloworld
