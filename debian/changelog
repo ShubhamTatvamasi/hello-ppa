@@ -1,5 +1,5 @@
-helloworld (1.0.9) distro; urgency=low
+helloworld (version-distro) distro; urgency=low
 
   * Added support for more ubuntu versions
 
- -- MAINTAINER <shubhamtatvamasi@gmail.com>  Fri, 09 Sep 2022 14:19:11 +0000
+ -- MAINTAINER <shubhamtatvamasi@gmail.com>  date +0000

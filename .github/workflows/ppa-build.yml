@@ -18,22 +18,33 @@ jobs:
 
       - name: Build and Upload packages
         run: |
+
+          VERSION=$(yq e '.Standards-Version' debian/control)
+          sed "s/version/${VERSION}/" -i debian/changelog
+          sed "s/date/$(date -u "+%a, %d %b %Y %T")/" -i debian/changelog
+
           for distro in $(distro-info --supported); do
 
-            sed "s/distro/${distro}/" -i debian/changelog
+            # Set distro
+            sed "s/distro/${distro}/g" -i debian/changelog
 
+            # Build debian packages
             sudo debuild -uc -us -S -sa \
               -k"shubhamtatvamasi@gmail.com" \
               -p"gpg --batch --passphrase "${{ secrets.GPG_PASSPHRASE }}" --pinentry-mode loopback"
 
+            # Sign Changes
             debsign ../*.changes \
               -k"shubhamtatvamasi@gmail.com" \
               -p"gpg --batch --passphrase "${{ secrets.GPG_PASSPHRASE }}" --pinentry-mode loopback"
 
+            # Upload packages
             dput --unchecked ppa:shubhamtatvamasi/helloworld ../*.changes
 
-            rm -rf ../*.{changes,build,buildinfo,dsc,upload,tar.gz}
+            # Cleanup
+            rm -rf ../*.{dsc,tar.gz,build,buildinfo,changes,upload}
 
-            sed "s/${distro}/distro/" -i debian/changelog
+            # Revert distro
+            sed "s/${distro}/distro/g" -i debian/changelog
 
           done
