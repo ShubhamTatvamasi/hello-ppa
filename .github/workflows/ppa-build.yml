@@ -1,5 +1,5 @@
 ---
-name: Build and upload packages to PPA
+name: Build and upload package to PPA
 
 on: workflow_dispatch
 
@@ -13,18 +13,18 @@ jobs:
       - name: Install devscripts
         run: sudo apt install devscripts dh-make -y
 
-      - name: Add GPG Key
+      - name: Import GPG Key
         run: echo "${{ secrets.GPG_PRIVATE_KEY }}" | gpg --batch --passphrase "${{ secrets.GPG_PASSPHRASE }}" --import
 
-      - name: Build the debian packages
+      - name: Build debian package
         run: sudo debuild -uc -us -S -sa
           -k"shubhamtatvamasi@gmail.com"
           -p"gpg --batch --passphrase "${{ secrets.GPG_PASSPHRASE }}" --pinentry-mode loopback"
 
-      - name: Sign changes with your Key
+      - name: Sign changes
         run: debsign ../*.changes
           -k"shubhamtatvamasi@gmail.com"
           -p"gpg --batch --passphrase "${{ secrets.GPG_PASSPHRASE }}" --pinentry-mode loopback"
 
-      - name: Sign changes with your Key
+      - name: Upload package
         run: dput --unchecked ppa:shubhamtatvamasi/helloworld ../*.changes
