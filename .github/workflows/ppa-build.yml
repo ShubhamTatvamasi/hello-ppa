@@ -25,6 +25,11 @@ jobs:
 
           for distro in $(distro-info --supported); do
 
+            # Skip if distro is bionic
+            if [[ "${distro}" == "bionic" ]]; then
+              continue
+            fi
+
             # Set distro
             sed "s/sed-distro/${distro}/g" -i debian/changelog
 
