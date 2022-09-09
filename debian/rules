@@ -4,8 +4,8 @@ DH_VERBOSE = 1
 %:
 	dh $@
 
-override_dh_auto_build:
-	go build helloworld.go
+# override_dh_auto_build:
+# 	go build helloworld.go
 
-override_dh_auto_clean:
-	go clean
+# override_dh_auto_clean:
+# 	go clean
