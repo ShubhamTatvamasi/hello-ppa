@@ -16,15 +16,24 @@ jobs:
       - name: Import GPG Key
         run: echo "${{ secrets.GPG_PRIVATE_KEY }}" | gpg --batch --passphrase "${{ secrets.GPG_PASSPHRASE }}" --import
 
-      - name: Build debian package
-        run: sudo debuild -uc -us -S -sa
-          -k"shubhamtatvamasi@gmail.com"
-          -p"gpg --batch --passphrase "${{ secrets.GPG_PASSPHRASE }}" --pinentry-mode loopback"
+      - name: Build and Upload packages
+        run: |
+          for distro in $(distro-info --supported); do
 
-      - name: Sign changes
-        run: debsign ../*.changes
-          -k"shubhamtatvamasi@gmail.com"
-          -p"gpg --batch --passphrase "${{ secrets.GPG_PASSPHRASE }}" --pinentry-mode loopback"
+            sed "s/distro/${distro}/" -i debian/changelog
 
-      - name: Upload package
-        run: dput --unchecked ppa:shubhamtatvamasi/helloworld ../*.changes
+            sudo debuild -uc -us -S -sa \
+              -k"shubhamtatvamasi@gmail.com" \
+              -p"gpg --batch --passphrase "${{ secrets.GPG_PASSPHRASE }}" --pinentry-mode loopback"
+
+            debsign ../*.changes \
+              -k"shubhamtatvamasi@gmail.com" \
+              -p"gpg --batch --passphrase "${{ secrets.GPG_PASSPHRASE }}" --pinentry-mode loopback"
+
+            dput --unchecked ppa:shubhamtatvamasi/helloworld ../*.changes
+
+            rm -rf ../*.{changes,build,buildinfo,dsc,upload,tar.gz}
+
+            sed "s/${distro}/distro/" -i debian/changelog
+
+          done
