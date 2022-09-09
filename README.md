@@ -17,6 +17,7 @@ Reference:
 https://www.debian.org/doc/manuals/maint-guide/dreq.en.html
 
 
+### Multipass Setup
 
 Create VM for development:
 ```bash
@@ -30,4 +31,10 @@ multipass launch focal \
 Access VM:
 ```bash
 multipass shell ppa
+```
+
+Delete the VM:
+```bash
+multipass delete ppa
+multipass purge
 ```
