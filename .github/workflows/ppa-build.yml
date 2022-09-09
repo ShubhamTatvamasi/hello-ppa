@@ -17,14 +17,16 @@ jobs:
         run: echo "${{ secrets.GPG_PRIVATE_KEY }}" | gpg --batch --passphrase "${{ secrets.GPG_PASSPHRASE }}" --import
 
       - name: Build the debian packages
-        run: sudo debuild -uc -us -S -sa \
-          -k"shubhamtatvamasi@gmail.com" \
-          -p"gpg --batch --passphrase "${{ secrets.GPG_PASSPHRASE }}" --pinentry-mode loopback"
+        run: |
+          sudo debuild -uc -us -S -sa \
+            -k"shubhamtatvamasi@gmail.com" \
+            -p"gpg --batch --passphrase "${{ secrets.GPG_PASSPHRASE }}" --pinentry-mode loopback"
 
       - name: Sign changes with your Key
-        run: debsign ../*.changes \
-          -k"shubhamtatvamasi@gmail.com" \
-          -p"gpg --batch --passphrase "${{ secrets.GPG_PASSPHRASE }}" --pinentry-mode loopback"
+        run: |
+          debsign ../*.changes \
+            -k"shubhamtatvamasi@gmail.com" \
+            -p"gpg --batch --passphrase "${{ secrets.GPG_PASSPHRASE }}" --pinentry-mode loopback"
 
       - name: Sign changes with your Key
         run: dput --unchecked ppa:shubhamtatvamasi/helloworld ../*.changes
