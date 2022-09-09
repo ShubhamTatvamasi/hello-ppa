@@ -1,5 +1,5 @@
-helloworld (1.0.7) focal; urgency=low
+helloworld (1.0.8) focal; urgency=low
 
-  * Updated rules
+  * Moved to Go Land
 
- -- MAINTAINER <shubhamtatvamasi@gmail.com>  Fri, 09 Sep 2022 12:57:19 +0000
+ -- MAINTAINER <shubhamtatvamasi@gmail.com>  Fri, 09 Sep 2022 13:25:56 +0000

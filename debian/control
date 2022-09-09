@@ -1,11 +1,15 @@
 Source: helloworld
+Standards-Version: 1.0.8
 Maintainer: Shubham Tatvamasi <shubhamtatvamasi@gmail.com>
-Standards-Version: 1.0.7
 Section: utils
-Build-Depends: debhelper (>= 10)
+Priority: optional
+Homepage: https://github.com/ShubhamTatvamasi/hello-ppa
+XS-Go-Import-Path: github.com/ShubhamTatvamasi/hello-ppa
+Build-Depends: debhelper-compat (= 12),
+  golang-any,
+  dh-golang,
 
 Package: helloworld
-Priority: optional
 Architecture: any
 Description: a simple helloworld package
   Just prints "Hello World", it's very useful.
