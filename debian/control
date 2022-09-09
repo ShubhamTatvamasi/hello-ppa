@@ -1,6 +1,6 @@
 Source: helloworld
 Maintainer: Shubham Tatvamasi <shubhamtatvamasi@gmail.com>
-Standards-Version: 1.0.0
+Standards-Version: 1.0.1
 Section: utils
 
 Package: helloworld
