@@ -4,6 +4,9 @@ DH_VERBOSE = 1
 %:
 	dh $@
 
+override_dh_auto_install:
+	install -D -m 0755 helloworld $$(pwd)/debian/helloworld/usr/local/bin/helloworld
+
 # override_dh_auto_build:
 # 	go build helloworld.go
 
